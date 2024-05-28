@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout Codebase') {
             steps {
                 cleanWs()
-                git branch: 'main', url: 'https://github.com/KHOLUD-2030/junit-automation.git'
+                git branch: 'main', url: 'https://github.com/KHOLUD-2030/Test-Repo.git'
             }
         }
 
@@ -47,6 +47,7 @@ pipeline {
     post {
         always {
             // Any cleanup or finalization steps here
+            echo 'Post-build cleanup...'
         }
     }
 }
