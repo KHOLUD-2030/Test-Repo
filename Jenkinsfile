@@ -30,7 +30,7 @@ pipeline {
                     sh 'docker compose version'
 
                     // Start containers defined in docker-compose.yaml
-                    dir('path/to/docker-compose') {
+                    dir('.') {
                         sh 'docker compose up -d --no-color --wait'
 
                         // Optional: Run additional checks or tests against the deployed containers
