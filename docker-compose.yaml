@@ -6,3 +6,7 @@ services:
       - ENABLE__ENVIRONMENT=false
     ports:
       - 3000:80
+
+  my-app:
+    image: my-app
+    # Any additional configurations as needed
