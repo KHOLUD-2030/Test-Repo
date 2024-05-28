@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout Codebase') {
             steps {
@@ -30,11 +31,14 @@ pipeline {
                     sh 'docker compose version'
 
                     // Start containers defined in docker-compose.yaml
-                    dir('.') {
+                    dir('path/to/docker-compose') {
                         sh 'docker compose up -d --no-color --wait'
 
-                        // Optional: Run additional checks or tests against the deployed containers
-                        sh 'curl http://localhost:3000/param?query=demo | jq'
+                        // Get the name of the container
+                        def containerName = sh(script: 'docker-compose ps -q <service_name>', returnStdout: true).trim()
+
+                        // Print logs of the container
+                        sh "docker logs $containerName"
                     }
 
                     // Stop and remove containers after deployment
