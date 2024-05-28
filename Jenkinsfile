@@ -31,18 +31,16 @@ pipeline {
                     sh 'docker compose version'
 
                     // Start containers defined in docker-compose.yaml
-                    dir('path/to/docker-compose') {
-                        sh 'docker compose up -d --no-color --wait'
+                    sh 'docker-compose up -d --no-color --wait'
 
-                        // Get the name of the container
-                        def containerName = sh(script: 'docker-compose ps -q <service_name>', returnStdout: true).trim()
+                    // Get the name of the container
+                    def containerName = sh(script: 'docker-compose ps -q echo-server', returnStdout: true).trim()
 
-                        // Print logs of the container
-                        sh "docker logs $containerName"
-                    }
+                    // Print logs of the container
+                    sh "docker logs $containerName"
 
                     // Stop and remove containers after deployment
-                    sh 'docker compose down --remove-orphans -v'
+                    sh 'docker-compose down --remove-orphans -v'
                 }
             }
         }
